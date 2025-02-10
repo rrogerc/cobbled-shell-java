@@ -1,5 +1,6 @@
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -22,9 +23,19 @@ public class Main {
                         System.out.print(" ");
                 }
                 System.out.println("");
+                continue;
             }
-            else
-                System.out.println(input + ": command not found");
+            if (Objects.equals(command[0], "type")) {
+                String[] builtins = {"echo", "exit"};
+                Arrays.sort(builtins);
+                if (command.length == 1)
+                    continue;
+                if (Arrays.binarySearch(builtins, command[1]) >= 0)
+                    System.out.println(command[1] + " is a shell builtin");
+                continue;
+            }
+
+            System.out.println(input + ": command not found");
         }
     }
 }
