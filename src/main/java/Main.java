@@ -73,10 +73,10 @@ public class Main {
                 handle_echo_command(command);
             else if (Objects.equals(command[0], "type"))
                 handle_type_command(command, path_directories);
-            else if(handle_path_program(command, input, path_directories))
+            else if (handle_path_program(command, input, path_directories))
                 continue;
-
-            System.out.println(input + ": command not found");
+            else
+                System.out.println(input + ": command not found");
         }
     }
 }
