@@ -5,11 +5,10 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class Main {
-    static void handle_type_command(String[] command) {
+    static void handle_type_command(String[] command, String[] path_directories) {
         if (command.length == 1)
             return;
 
-        String[] path_directories = System.getenv("PATH").split(":");
 
         String[] builtins = {"echo", "exit", "type"};
         Arrays.sort(builtins);
@@ -21,7 +20,7 @@ public class Main {
 
         for (String dir : path_directories) {
             Path path = Path.of(dir + "/" + command[1]);
-            if (Files.isExecutable(path)){
+            if (Files.isExecutable(path)) {
                 System.out.println(command[1] + " is " + path.toString());
                 return;
             }
@@ -40,6 +39,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
+        String[] path_directories = System.getenv("PATH").split(":");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -56,9 +56,21 @@ public class Main {
             if (Objects.equals(command[0], "echo"))
                 handle_echo_command(command);
             else if (Objects.equals(command[0], "type"))
-                handle_type_command(command);
-            else
-                System.out.println(input + ": command not found");
+                handle_type_command(command, path_directories);
+
+            for (String dir : path_directories) {
+                Path path = Path.of(dir + "/" + command[0]);
+                if (Files.isExecutable(path)) {
+                    String full_command = dir + "/" + command[0] + " " + input.substring(command[0].length());
+                    String[] full_path = full_command.split("\s+");
+
+                    Process p = Runtime.getRuntime().exec(full_path);
+                    p.getInputStream().transferTo(System.out);
+                }
+            }
+
+
+            System.out.println(input + ": command not found");
         }
     }
 }
