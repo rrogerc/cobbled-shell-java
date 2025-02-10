@@ -6,14 +6,15 @@ import java.util.Arrays;
 
 public class Main {
     static void handle_type_command(String[] command) {
+        if (command.length == 1)
+            return;
+
         String[] path_directories = System.getenv("PATH").split(":");
 
         String[] builtins = {"echo", "exit", "type"};
         Arrays.sort(builtins);
 
-        if (command.length == 1)
-            return;
-        else if (Arrays.binarySearch(builtins, command[1]) >= 0) {
+        if (Arrays.binarySearch(builtins, command[1]) >= 0) {
             System.out.println(command[1] + " is a shell builtin");
             return;
         }
