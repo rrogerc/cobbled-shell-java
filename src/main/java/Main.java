@@ -22,7 +22,7 @@ public class Main {
                     if (i != command.length - 1)
                         System.out.print(" ");
                 }
-                System.out.println("");
+                System.out.println();
                 continue;
             }
             else if (Objects.equals(command[0], "type")) {
@@ -32,7 +32,8 @@ public class Main {
                     continue;
                 if (Arrays.binarySearch(builtins, command[1]) >= 0)
                     System.out.println(command[1] + " is a shell builtin");
-                continue;
+                else
+                    System.out.println(input + ": not found");
             }
 
             System.out.println(input + ": command not found");
