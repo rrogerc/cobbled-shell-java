@@ -15,7 +15,7 @@ public class Main {
 
                 Process p = Runtime.getRuntime().exec(full_path);
                 p.getInputStream().transferTo(System.out);
-                break;
+                return true;
             }
         }
 
