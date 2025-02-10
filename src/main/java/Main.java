@@ -20,7 +20,7 @@ public class Main {
         }
 
         for (String dir : path_directories) {
-            Path path = Path.of(dir);
+            Path path = Path.of(dir + "/" + command[1]);
             if (Files.isExecutable(path)){
                 System.out.println(command[1] + " is " + path.toString());
                 return;
