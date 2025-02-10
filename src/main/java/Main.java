@@ -16,7 +16,7 @@ public class Main {
 
             if (command.length == 0)
                 continue;
-            if (Objects.equals(command[0], "echo")) {
+            else if (Objects.equals(command[0], "echo")) {
                 for (int i = 1; i < command.length; i++) {
                     System.out.print(command[i]);
                     if (i != command.length - 1)
@@ -25,8 +25,8 @@ public class Main {
                 System.out.println("");
                 continue;
             }
-            if (Objects.equals(command[0], "type")) {
-                String[] builtins = {"echo", "exit"};
+            else if (Objects.equals(command[0], "type")) {
+                String[] builtins = {"echo", "exit", "type"};
                 Arrays.sort(builtins);
                 if (command.length == 1)
                     continue;
