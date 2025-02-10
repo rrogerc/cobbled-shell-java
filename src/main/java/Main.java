@@ -33,7 +33,8 @@ public class Main {
                 if (Arrays.binarySearch(builtins, command[1]) >= 0)
                     System.out.println(command[1] + " is a shell builtin");
                 else
-                    System.out.println(input + ": not found");
+                    System.out.println(command[1] + ": not found");
+                continue;
             }
 
             System.out.println(input + ": command not found");
